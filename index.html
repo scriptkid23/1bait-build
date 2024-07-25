@@ -54,6 +54,25 @@
     var fullscreenButton = document.querySelector("#unity-fullscreen-button");
     var warningBanner = document.querySelector("#unity-warning");
 
+    // Kiểm tra xem Telegram WebApp đã khởi tạo chưa
+    if (window.Telegram && window.Telegram.WebApp) {
+      // Truy cập thông tin initDataUnsafe
+      let initDataUnsafe = window.Telegram.WebApp.initDataUnsafe;
+
+      // Lấy thông tin người dùng
+      let user = initDataUnsafe.user;
+
+      // Kiểm tra và lấy userID
+      if (user && user.id) {
+        let userID = user.id;
+        console.log("UserID:", userID); // Xuất userID ra console
+      } else {
+        console.log("Không tìm thấy thông tin người dùng.");
+      }
+    } else {
+      console.log("Telegram WebApp chưa được khởi tạo.");
+    }
+
     function unityShowBanner(msg, type) {
       function updateBannerVisibility() {
         warningBanner.style.display = warningBanner.children.length ? 'block' : 'none';
