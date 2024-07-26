@@ -1,8 +1,8 @@
-"use client";
-import { useEffect, useState } from "react";
+import "./App.css";
+import { useState, useEffect } from "react";
 import { Unity, useUnityContext } from "react-unity-webgl";
 
-export default function Home() {
+function App() {
   const { unityProvider } = useUnityContext({
     loaderUrl: "/build/WebGL Builds.loader.js",
     dataUrl: "/build/WebGL Builds.data",
@@ -10,13 +10,16 @@ export default function Home() {
     codeUrl: "/build/WebGL Builds.wasm",
   });
 
-  const [devicePixelRatio, setDevicePixelRatio] = useState(1);
-  const [dimensions, setDimensions] = useState({ width: 375, height: 667 });
+  const [devicePixelRatio, setDevicePixelRatio] = useState(
+    window.devicePixelRatio
+  );
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
+  const [dimensions, setDimensions] = useState({
+    width: window.innerWidth,
+    height: window.innerHeight,
+  });
 
   useEffect(() => {
-    // Set initial states after component mounts
-    setDevicePixelRatio(window.devicePixelRatio);
-
     // Function to update the device pixel ratio
     const updateDevicePixelRatio = () => {
       setDevicePixelRatio(window.devicePixelRatio);
@@ -24,7 +27,8 @@ export default function Home() {
 
     // Function to update the dimensions of the Unity component
     const updateDimensions = () => {
-      if (window.innerWidth <= 768) {
+      setIsMobile(window.innerWidth <= 768);
+      if (isMobile) {
         setDimensions({
           width: window.innerWidth,
           height: window.innerHeight,
@@ -37,23 +41,25 @@ export default function Home() {
       }
     };
 
-    // Initial dimensions setup
-    updateDimensions();
-
     // Media matcher for device pixel ratio changes
     const mediaMatcher = window.matchMedia(
-      `screen and (resolution: ${window.devicePixelRatio}dppx)`
+      `screen and (resolution: ${devicePixelRatio}dppx)`
     );
     mediaMatcher.addEventListener("change", updateDevicePixelRatio);
 
     // Event listener for window resize
     window.addEventListener("resize", updateDimensions);
 
+    // Initial dimensions setup
+    updateDimensions();
+
     return () => {
       mediaMatcher.removeEventListener("change", updateDevicePixelRatio);
       window.removeEventListener("resize", updateDimensions);
     };
-  }, []);
+  }, [devicePixelRatio, isMobile]);
+
+  console.log(devicePixelRatio);
 
   return (
     <Unity
@@ -63,3 +69,5 @@ export default function Home() {
     />
   );
 }
+
+export default App;
