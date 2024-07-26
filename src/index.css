@@ -1,10 +1,3 @@
-:root {
-  --viewportHeight: 100vh;
-  --viewportWidth: 100vw;
-  --viewportStableHeight: 600px; /* Default value or calculated */
-  --custom-max-width: 22rem;
-}
-
 body {
   margin: 0;
   padding: 0;
