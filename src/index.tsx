@@ -1,20 +1,13 @@
-import React from "react";
 import ReactDOM from "react-dom/client";
 import "./index.css";
-import App from "./App";
 import reportWebVitals from "./reportWebVitals";
-import { SDKProvider } from "@telegram-apps/sdk-react";
+import { Root } from "./components/Root";
+import "@telegram-apps/telegram-ui/dist/styles.css";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
 );
-root.render(
-  <React.StrictMode>
-    <SDKProvider acceptCustomStyles debug>
-      <App />
-    </SDKProvider>
-  </React.StrictMode>
-);
+root.render(<Root />);
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
