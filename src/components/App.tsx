@@ -11,7 +11,6 @@ import { type FC, useEffect } from "react";
 import { IndexPage } from "../pages/IndexPage/IndexPage";
 
 export const App: FC = () => {
-  const lp = useLaunchParams();
   const miniApp = useMiniApp();
   const themeParams = useThemeParams();
   const viewport = useViewport();
