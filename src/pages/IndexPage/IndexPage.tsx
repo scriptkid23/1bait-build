@@ -13,10 +13,10 @@ export const IndexPage: FC = () => {
   );
 
   const { unityProvider } = useUnityContext({
-    loaderUrl: "build/myunityapp.loader.js",
-    dataUrl: "build/myunityapp.data",
-    frameworkUrl: "build/myunityapp.framework.js",
-    codeUrl: "build/myunityapp.wasm",
+    loaderUrl: "/build/WebGL Builds.loader.js",
+    dataUrl: "/build/WebGL Builds.data",
+    frameworkUrl: "/build/WebGL Builds.framework.js",
+    codeUrl: "/build/WebGL Builds.wasm",
   });
 
   useEffect(() => {
