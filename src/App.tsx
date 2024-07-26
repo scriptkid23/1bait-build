@@ -1,4 +1,8 @@
-import { useInitData, useLaunchParams } from "@telegram-apps/sdk-react";
+import {
+  bindViewportCSSVars,
+  useInitData,
+  useLaunchParams,
+} from "@telegram-apps/sdk-react";
 import { initViewport, requestViewport } from "@telegram-apps/sdk";
 import { useState, useEffect } from "react";
 import { Unity, useUnityContext } from "react-unity-webgl";
@@ -30,6 +34,20 @@ function App() {
       const viewportPromise = initViewport();
       const viewport = await viewportPromise[0];
       console.log(viewport);
+
+      // Bind viewport CSS variables
+      bindViewportCSSVars(viewport, (key) => {
+        switch (key) {
+          case "height":
+            return `--viewportHeight`;
+          case "width":
+            return `--viewportWidth`;
+          case "stable-height":
+            return `--viewportStableHeight`;
+          default:
+            return `--void`;
+        }
+      });
 
       const updateDimensions = (data: any) => {
         setDimensions({
