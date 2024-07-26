@@ -1,4 +1,4 @@
-import { useInitData, useLaunchParams } from "@telegram-apps/sdk-react";
+import { useLaunchParams } from "@telegram-apps/sdk-react";
 import { initViewport, requestViewport } from "@telegram-apps/sdk";
 import { useState, useEffect } from "react";
 import { Unity, useUnityContext } from "react-unity-webgl";
@@ -14,7 +14,7 @@ function App() {
     codeUrl: "/build/WebGL Builds.wasm",
   });
 
-  const initDataRaw = useLaunchParams().initDataRaw;
+  const initDataRaw = useLaunchParams();
   console.log(initDataRaw);
 
   const [devicePixelRatio, setDevicePixelRatio] = useState(
