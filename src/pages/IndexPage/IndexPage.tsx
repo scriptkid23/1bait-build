@@ -1,3 +1,4 @@
+import { useInitData } from "@telegram-apps/sdk-react";
 import { useEffect, useState, type FC } from "react";
 import { isBrowser, isMobile } from "react-device-detect";
 import { Unity, useUnityContext } from "react-unity-webgl";
@@ -11,6 +12,10 @@ export const IndexPage: FC = () => {
   const [devicePixelRatio, setDevicePixelRatio] = useState(
     window.devicePixelRatio
   );
+
+  const data = useInitData();
+
+  console.log(data);
 
   const { unityProvider } = useUnityContext({
     loaderUrl: "/build/WebGL Builds.loader.js",
