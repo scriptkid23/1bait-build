@@ -39,6 +39,7 @@ export const IndexPage: FC = () => {
 
   useEffect(() => {
     if (isLoaded) {
+      console.log("SEND_DATA_FROM_TELEGRAM", data?.user);
       handleSendMessage();
     }
   }, [isLoaded]);
