@@ -15,14 +15,33 @@ export const IndexPage: FC = () => {
 
   const data = useInitData();
 
-  console.log(data);
-
-  const { unityProvider } = useUnityContext({
+  const { unityProvider, sendMessage, isLoaded } = useUnityContext({
     loaderUrl: "/build/WebGL Builds.loader.js",
     dataUrl: "/build/WebGL Builds.data",
     frameworkUrl: "/build/WebGL Builds.framework.js",
     codeUrl: "/build/WebGL Builds.wasm",
   });
+
+  const handleSendMessage = () => {
+    if (!data || !isLoaded) return;
+
+    sendMessage(
+      "UserManager",
+      "GetUserInfoFromTelegram",
+      JSON.stringify({
+        user_id: data.user?.id,
+        first_name: data.user?.firstName,
+        last_name: data.user?.lastName,
+        username: data.user?.username,
+      })
+    );
+  };
+
+  useEffect(() => {
+    if (isLoaded) {
+      handleSendMessage();
+    }
+  }, [isLoaded]);
 
   useEffect(() => {
     const updateDevicePixelRatio = () => {
