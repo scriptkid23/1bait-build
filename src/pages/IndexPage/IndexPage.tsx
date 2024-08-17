@@ -1,4 +1,8 @@
-import { useInitData, useInitDataRaw } from "@telegram-apps/sdk-react";
+import {
+  retrieveLaunchParams,
+  useInitData,
+  useInitDataRaw,
+} from "@telegram-apps/sdk-react";
 import { useEffect, useState, type FC } from "react";
 import { isBrowser, isMobile } from "react-device-detect";
 import { Unity, useUnityContext } from "react-unity-webgl";
@@ -15,8 +19,8 @@ export const IndexPage: FC = () => {
 
   const data = useInitData();
   const rawData = useInitDataRaw();
-
-  console.log(data, rawData);
+  const { initDataRaw, initData } = retrieveLaunchParams();
+  console.log(initDataRaw, initData);
 
   const { unityProvider, sendMessage, isLoaded } = useUnityContext({
     loaderUrl: "/build/WebGL Builds.loader.js",
