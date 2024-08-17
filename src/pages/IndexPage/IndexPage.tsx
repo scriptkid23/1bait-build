@@ -15,6 +15,8 @@ export const IndexPage: FC = () => {
 
   const data = useInitData();
 
+  console.log(data);
+
   const { unityProvider, sendMessage, isLoaded } = useUnityContext({
     loaderUrl: "/build/WebGL Builds.loader.js",
     dataUrl: "/build/WebGL Builds.data",
